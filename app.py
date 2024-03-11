@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import json
 
 app = Flask(__name__)
 
@@ -19,10 +18,9 @@ class User:
 
 listOfUsers = []
 
-# Utilize a dictionary for quicker access via user ID
 users = {}
 
-# Add two initial users with ids
+# Added two initial users with ids
 user1 = User("Parth", "parth.gajera@dal.ca")
 user2 = User("Darshan", "darshan.patel@dal.ca")
 users[str(user1.id)] = user1
