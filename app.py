@@ -25,8 +25,8 @@ users = {}
 # Add two initial users with ids
 user1 = User("Parth", "parth.gajera@dal.ca")
 user2 = User("Darshan", "darshan.patel@dal.ca")
-users[user1.id] = user1
-users[user2.id] = user2
+users[str(user1.id)] = user1
+users[str(user2.id)] = user2
 
 @app.route('/users', methods=['GET'])
 def get_all_users():
