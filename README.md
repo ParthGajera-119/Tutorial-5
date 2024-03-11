@@ -98,8 +98,8 @@ Here the above code written in flask for  creating a simple REST API using pytho
 
 1. The Route made for different endpoints is taken from the [Routing in flask website of "HackersandSlackers".](https://hackersandslackers.com/flask-routes/)
 
-2. For sending the JSON repsonse in flask is taken from the website [How to return a JSON response from a Flask API of "Geeks for Geeks"](https://www.geeksforgeeks.org/how-to-return-a-json-response-from-a-flask-api/)
+2. For sending the JSON repsonse in flask is taken from the website [How to return a JSON response from a Flask API of "Geeks for Geeks".](https://www.geeksforgeeks.org/how-to-return-a-json-response-from-a-flask-api/)
 
 ## Acknowledgments
 
-I have learn how to use the route for making endpoints  and also how to handle data in backend from the [official documentation of Flask](https://flask.palletsprojects.com/).
+I have learn how to use the route for making endpoints  and also how to handle data in backend from the [official documentation of Flask.](https://flask.palletsprojects.com/)
