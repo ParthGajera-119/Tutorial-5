@@ -49,7 +49,8 @@ def add_user():
 
 @app.route('/update/<id>', methods=['PUT'])
 def update_user(id):
-    user = users.get(id)
+    Id=str(id)
+    user = users.get(Id)
     if user:
         data = request.json
         user.update(firstName=data.get('firstName'), email=data.get('email'))
@@ -59,7 +60,8 @@ def update_user(id):
 
 @app.route('/user/<id>', methods=['GET'])
 def get_user(id):
-    user = users.get(id)
+    Id=str(id)
+    user = users.get(Id)
     if user:
         return jsonify({"success": True, "user": vars(user)})
     else:
