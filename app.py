@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify
 import json
-import uuid
 
 app = Flask(__name__)
 
 class User:
-    def __init__(self, id, firstName, email):
-        self.id = id
+    user_id = 1
+    def __init__(self, firstName, email):
+        self.id = User.user_id
         self.firstName = firstName
         self.email = email
+        User.user_id += 1
 
     def update(self, firstName=None, email=None):
         if firstName:
@@ -22,8 +23,8 @@ listOfUsers = []
 users = {}
 
 # Add two initial users with ids
-user1 = User(str(uuid.uuid4()), "ABC", "abc@abc.ca")
-user2 = User(str(uuid.uuid4()), "XYZ", "xyz@xyz.ca")
+user1 = User("Parth", "parth.gajera@dal.ca")
+user2 = User("Darshan", "darshan.patel@dal.ca")
 users[user1.id] = user1
 users[user2.id] = user2
 
@@ -40,7 +41,7 @@ def get_all_users():
 def add_user():
     try:
         data = request.json
-        new_user = User(str(uuid.uuid4()), data['firstName'], data['email'])
+        new_user = User(data['firstName'], data['email'])
         users[new_user.id] = new_user
         return jsonify({"message": "User added", "success": True}), 201
     except KeyError as e:
