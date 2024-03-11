@@ -42,15 +42,14 @@ def add_user():
     try:
         data = request.json
         new_user = User(data['firstName'], data['email'])
-        users[new_user.id] = new_user
+        users[str(new_user.id)] = new_user
         return jsonify({"message": "User added", "success": True}), 201
     except KeyError as e:
         return jsonify({"message": "Missing data", "success": False, "error": str(e)}), 400
 
 @app.route('/update/<id>', methods=['PUT'])
 def update_user(id):
-    Id=str(id)
-    user = users.get(Id)
+    user = users.get(id)
     if user:
         data = request.json
         user.update(firstName=data.get('firstName'), email=data.get('email'))
@@ -60,8 +59,7 @@ def update_user(id):
 
 @app.route('/user/<id>', methods=['GET'])
 def get_user(id):
-    Id=str(id)
-    user = users.get(Id)
+    user = users.get(id)
     if user:
         return jsonify({"success": True, "user": vars(user)})
     else:
