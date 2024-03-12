@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
+import re
 
 app = Flask(__name__)
+
+email_regex = r'^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 class User:
     user_id = 1
@@ -16,9 +19,14 @@ class User:
         if email:
             self.email = email
 
-listOfUsers = []
-
 users = {}
+
+# Function to validate email
+def is_valid_email(email):
+    if re.match(email_regex, email):
+        return True
+    else:
+        return False
 
 # Added two initial users with ids
 user1 = User("Parth", "parth.gajera@dal.ca")
@@ -37,8 +45,10 @@ def get_all_users():
 
 @app.route('/add', methods=['POST'])
 def add_user():
+    data = request.json
+    if not is_valid_email(data.get('email')):
+        return jsonify({"message": "Invalid email address", "success": False}), 400
     try:
-        data = request.json
         new_user = User(data['firstName'], data['email'])
         users[str(new_user.id)] = new_user
         return jsonify({"message": "User added", "success": True}), 201
@@ -50,6 +60,8 @@ def update_user(id):
     user = users.get(id)
     if user:
         data = request.json
+        if 'email' in data and not is_valid_email(data['email']):
+            return jsonify({"message": "Invalid email address", "success": False}), 400
         user.update(firstName=data.get('firstName'), email=data.get('email'))
         return jsonify({"message": "User updated", "success": True})
     else:
